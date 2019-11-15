@@ -1,2 +1,2 @@
-const { Bem } = require ('./lib/Bem');
-module.exports = Bem;
+import Bem from "./lib/Bem";
+export default Bem;
