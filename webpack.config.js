@@ -6,7 +6,7 @@ module.exports = {
     output: {
         path: path.resolve('lib'),
         filename: 'Bem.js',
-        libraryTarget: 'commonjs2'
+        libraryTarget: 'umd'
     },
     module: {
         rules: [
