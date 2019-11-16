@@ -14,7 +14,7 @@ npm i react-better-bem
 ```javascript
 import React from 'react';
 import Bem from 'react-better-bem';
-import style from './BemComponent.style.css';
+import style from './BemComponent.module.css';
 
 const BemComponent = () => (
   <Bem block="block" style={style} strict={true}>
