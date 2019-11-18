@@ -7,6 +7,11 @@ const Bem = ({ children, block = '', mod, style, strict }) => {
 };
 
 function recursivelyApplyBem(children, bem, inheritedMods = []) {
+    // if there's no children, return nothing
+    if (!children) {
+        return null;
+    }
+
     return React.Children.map(children, (child) => {
         // sorry, only handling valid elements
         // and no, no, no we're not handling nested
