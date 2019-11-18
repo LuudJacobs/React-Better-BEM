@@ -1,6 +1,6 @@
 {
   "name": "react-better-bem",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "React component for easy BEM classname handling",
   "main": "index.js",
   "scripts": {
