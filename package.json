@@ -1,6 +1,6 @@
 {
   "name": "react-better-bem",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React component for easy BEM classname handling",
   "main": "index.js",
   "scripts": {
@@ -28,7 +28,7 @@
     "better-bem": "^1.0.3"
   },
   "peerDependencies": {
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   }
 }
