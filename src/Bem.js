@@ -1,3 +1,9 @@
+/*
+ * React-Better-BEM
+ * (c) Luud Jacobs
+ * @license ISC
+ */
+
 import React from 'react';
 import BEM from 'better-bem';
 

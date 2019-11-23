@@ -6,7 +6,7 @@ React component which uses [better-bem](https://github.com/LuudJacobs/better-bem
 
 ```zsh
 # install
-npm i react-better-bem
+npm i react-better-bem --save
 ```
 
 ## Usage
@@ -25,17 +25,21 @@ const BemComponent = () => (
 );
 ```
 
+### better-bem
+
+This component uses [better-bem](https://github.com/LuudJacobs/better-bem) for generating classnames. Please refer to the readme in that project for details on how the 'block', 'el' and 'mod' props work.
+
 ### `<Bem/>` Props
 
 #### block
 
-_string_, _array_ or _object_ The bem 'block' classname(s)
+_string_, _array_ or _object_ The bem 'block' classname(s).
 
 default: `""`
 
 #### mod
 
-_string_, _array_ or _object_ The bem 'modifier' classname(s). These are passed down to child elements
+_string_, _array_ or _object_ The bem 'modifier' classname(s).
 
 #### style
 
@@ -45,17 +49,25 @@ default: `{}`
 
 #### strict
 
-_boolean_ Only output classnames which are mapped via classname map in style prop
+_boolean_ If `true` only classnames defined in the classname map passed to the style prop will be outputted.
 
 default: `true`
 
-### Child Props
+### Children Props
+
+The `<Bem/>` component walks over its children and looks for the following props to generate a className prop.
 
 #### isBlock
 
 _bool_ If true this element is handled as the bem block element
 
 default: `false`
+
+#### block
+
+**todo:** _string_, _array_ or _object_ The bem 'block' classname(s)
+
+default: `""`
 
 #### el
 
@@ -73,13 +85,9 @@ default: `""`
 
 _string_ Default classname props. This classname will be preserved and generated bem classnames will be added to this classname.
 
-### better-bem
-
-This component uses [better-bem](https://github.com/LuudJacobs/better-bem) for generating classnames. Please refer to the readme in that project for details on how block, el and mod do work.
-
 ### Nesting
 
-`<Bem/>` components can safely be nested. This will generate a new bem block 'namespace' and no props from the outer `<Bem/>` component will leak into the inner `<Bem/>` component.
+`<Bem/>` components can safely be nested. This will generate a new bem block 'namespace'. **todo:** inherit 'style' and 'strict' props, unless they're explicitly defined for the nested component.
 
 ### Example
 
@@ -94,7 +102,7 @@ const BemComponent = () => {
       <div isBlock>
         <h1 el="title">I left my wallet in El Segundo</h1>
         <h2 el="title" mod="sub">
-            I got to get it, <span el="repeat">I got</span>, <span el="repeat">I got to get it</span>
+          I got to get it, <span el="repeat">I got</span>, <span el="repeat">I got to get it</span>
         </h2>
         <Bem block="lyrics">
           <p className="paragraph" isBlock>
@@ -118,7 +126,7 @@ const BemComponent = () => {
 <div class="container">
   <h1 class="container__title">I left my wallet in El Segundo</h1>
   <h2 class="container__title container__title--sub">
-      I got to get it, <span className="container__title__repeat container__title__repeat--sub">I got</span>, <span className="container__title__repeat container__title__repeat--sub">I got to get it</span>
+    I got to get it, <span className="container__title__repeat container__title__repeat--sub">I got</span>, <span className="container__title__repeat container__title__repeat--sub">I got to get it</span>
   </h2>
   <p class="paragraph lyrics">
     My mother went away for a month-long <span class="lyrics__rhyme lyrics__rhyme--scheme-1">trip</span><br>
