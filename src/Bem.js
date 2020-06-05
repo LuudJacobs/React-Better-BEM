@@ -29,7 +29,7 @@ function recursivelyApplyBem(children, bem, inheritedMods = []) {
         // destruct element props
         const {
             isBlock, el,
-            mod: elementMods,
+            mod: elementMods = [],
             className: elementClassName = '',
             children,
             ...restProps
@@ -39,7 +39,7 @@ function recursivelyApplyBem(children, bem, inheritedMods = []) {
         const bemBase = bem.el(el);
 
         // merge inherited mods and element props
-        const mods = [inheritedMods, elementMods].flat();
+        const mods = inheritedMods.concat(elementMods);
 
         // create classname string with passed classname
         // and generated bem classname. If neither block or
