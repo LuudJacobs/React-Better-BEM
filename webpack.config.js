@@ -4,7 +4,7 @@ module.exports = {
     mode: 'production',
     entry: './src/Bem.js',
     output: {
-        path: path.resolve('build'),
+        path: path.resolve('dist'),
         filename: 'Bem.js',
         libraryTarget: 'commonjs2'
     },

@@ -1,8 +1,13 @@
 {
   "name": "react-better-bem",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "React component for easy BEM classname handling",
-  "main": "./build/Bem.js",
+  "main": "dist/Bem.js",
+  "module": "src/Bem.js",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "test": "echo \"lol 🤣\" && exit 1",
     "build": "webpack",
@@ -27,18 +32,18 @@
   },
   "homepage": "https://github.com/LuudJacobs/React-Better-BEM#readme",
   "dependencies": {
-    "better-bem": "^1.1.2"
+    "better-bem": "^2.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
-    "@babel/preset-react": "^7.7.4",
-    "babel-loader": "^8.0.6",
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "babel-loader": "^8.1.0",
     "path": "^0.12.7",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "webpack": "^4.5.0",
-    "webpack-cli": "^3.2.1"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   },
   "peerDependencies": {
     "react": "^16.0.0",
