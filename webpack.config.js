@@ -17,5 +17,5 @@ module.exports = {
             }
         ]
     },
-    externals: ['react', 'react-dom', 'better-bem']
+    externals: ['react', 'react-dom']
 }

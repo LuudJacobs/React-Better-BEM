@@ -5,14 +5,14 @@
  */
 
 import React from 'react';
-import BEM from 'better-bem';
+import bem from 'better-bem';
 
-const Bem = ({ children, block = '', mod, style, strict }) => {
-    const bem = BEM(block, style, strict);
-    return recursivelyApplyBem(children, bem, mod);
+const Bem = ({ children, block = '', mod = [], style = {}, strict = true, glue = {} }) => {
+    const _bem = bem(block, mod, style, strict, glue);
+    return recursivelyApplyBem(children, _bem);
 };
 
-function recursivelyApplyBem(children, bem, inheritedMods = []) {
+function recursivelyApplyBem(children, _bem) {
     // if there's no children, return nothing
     if (!children) {
         return null;
@@ -28,23 +28,20 @@ function recursivelyApplyBem(children, bem, inheritedMods = []) {
 
         // destruct element props
         const {
-            isBlock, el,
-            mod: elementMods = [],
+            el,
+            mod = [],
             className: elementClassName = '',
             children,
             ...restProps
         } = child.props;
 
-        // get base (.block or .block__element)
-        const bemBase = bem.el(el);
+        const element = el === undefined ? child.name : el;
 
-        // merge inherited mods and element props
-        const mods = inheritedMods.concat(elementMods);
+        const elementBem = _bem.el(el).mod(mod);
 
-        // create classname string with passed classname
-        // and generated bem classname. If neither block or
-        // el is set, only return elementClassName
-        const className = isBlock || el ? [elementClassName, bemBase.mod(mods).cn].join (' ').trim() : elementClassName;
+        console.log({el, mod}, elementBem.cn);
+
+        const className = [elementBem.cn, elementClassName].join(' ').trim();
 
         // generate 'new' element with generated bem classname
         // recursively apply bem classnames to 'new' children
@@ -53,7 +50,7 @@ function recursivelyApplyBem(children, bem, inheritedMods = []) {
             {
                 ...restProps,
                 ...(className && { className }),
-                children: recursivelyApplyBem(children, bemBase, mods)
+                children: recursivelyApplyBem(children, elementBem)
             }
         );
     });
