@@ -14,15 +14,38 @@ npm i react-better-bem --save
 ```javascript
 import React from 'react';
 import Bem from 'react-better-bem';
-import style from './BemComponent.module.css';
 
 const BemComponent = () => (
-    <Bem block="block" style={style} strict={true}>
-        <article isBlock>
-            <h1 el="element" mod="modifiers">title</h1>
-        </article>
-    </Bem>
+  <Bem>
+    <article mod="new">
+      <h1 el="title" mod={['large', { bold: true, color: 'blue' }]}>
+        Long classnames nobody wants to write
+      </h1>
+      <p mod="intro">
+        BEM is great and all, but who wants to spend all day writing classnames?
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quod idem cum vestri faciant, non satis magnam tribuunt inventoribus gratiam.
+      </p>
+    </article>
+  </Bem>
 );
+```
+
+**Output:**
+
+```html
+<article class="article article--new">
+  <h1 class="article__title article__title--new article__title--large article__title--bold article__title--color-blue">
+    Long classnames nobody wants to write
+  </h1>
+  <p class="article__p article__p--new article__p--intro">
+    BEM is great and all, but who wants to spend all day writing classnames?
+  </p>
+  <p class="article__p article__p--new">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quod idem cum vestri faciant, non satis magnam tribuunt inventoribus gratiam.
+  </p>
+</article>
 ```
 
 ### better-bem
@@ -49,25 +72,13 @@ default: `{}`
 
 #### strict
 
-_boolean_ If `true` only classnames defined in the classname map passed to the style prop will be outputted.
+_boolean_ If `true` only classnames defined in the classname map passed to the style prop will be outputted. This will prevent the generation of unused classnames.
 
 default: `true`
 
 ### Children Props
 
 The `<Bem/>` component walks over its children and looks for the following props to generate a className prop.
-
-#### isBlock
-
-_bool_ If true this element is handled as the bem block element
-
-default: `false`
-
-#### block
-
-**todo:** _string_, _array_ or _object_ The bem 'block' classname(s)
-
-default: `""`
 
 #### el
 
@@ -87,7 +98,7 @@ _string_ Default classname props. This classname will be preserved and generated
 
 ### Nesting
 
-`<Bem/>` components can safely be nested. This will generate a new bem block 'namespace'. **todo:** inherit 'style' and 'strict' props, unless they're explicitly defined for the nested component.
+`<Bem/>` components can safely be nested. This will generate a new bem block 'namespace'. None of the properties are inherited.
 
 ### Example
 
@@ -96,45 +107,78 @@ import React from 'react';
 import Bem from 'react-better-bem';
 import style from './BemComponent.module.css';
 
-const BemComponent = () => {
-    return (
-        <Bem block="container" style={style} strict={false}>
-            <div isBlock>
-                <h1 el="title">I left my wallet in El Segundo</h1>
-                <h2 el="title" mod="sub">
-                    I got to get it, <span el="repeat">I got</span>, <span el="repeat">I got to get it</span>
-                </h2>
-                <Bem block="lyrics">
-                    <p className="paragraph" isBlock>
-                        My mother went away for a month-long <span el="rhyme" mod={{ scheme: '1' }}>trip</span><br/>
-                        Her and some friends on an ocean liner <span el="rhyme" mod={{ scheme: '1' }}>ship</span><br/>
-                        She made a big mistake by leaving me <span el="rhyme" mod={{ scheme: '2' }}>home</span></br>
-                        I had to <span el="rhyme" mod={{ scheme: '2' }}>roam</span> so I picked up the <span el="rhyme" mod={{ scheme: '2' }}>phone</span><br/>
-                        Dialed Ali up to see what was going <span el="rhyme" mod={{ scheme: '3' }}>down</span><br/>
-                        Told him I pick him up so we could drive <span el="rhyme" mod={{ scheme: '3' }}>around</span>
-                    </p>
-                </Bem>
-            </div>
-        </Bem>
-    );
-};
+const BemComponent = () => (
+  <Bem style={style}>
+    <div el="container" mod="padded">
+      <h1 el="title">This title is an element in the container block</h1>
+      <h2 el="title" mod="sub small">
+        There's no modifier classname '--small' in the css sheet, so it will not be applied.
+      </h2>
+      <Bem block="inner" style={style}>
+        <p className="paragraph">
+          {'This is a new <Bem/> instance. Classnames in the className property will always be passed on and will not be used for classname generation.'}
+        </p>
+        <p mod={{ bold: true, size: 2, color: 'blue' }}>
+          You can use objects for more advanced classname generation.
+        </p>
+      </Bem>
+    </div>
+  </Bem>
+);
+```
+
+```css
+/* BemComponent.module.css */
+
+.container {
+  margin: 0 auto;
+  max-width: 640px;
+}
+
+.container--padded {
+  padding: 0 1em;
+}
+
+.container__title {
+  font-size: 1.8em;
+  line-height: 1;
+}
+
+.container__title--sub {
+  font-size: 1.2em;
+}
+
+.inner__p {
+  line-height: 1.8;
+  max-width: 400px;
+}
+
+.inner__p--bold {
+  font-weight: bold;
+}
+
+.inner__p--size-2 {
+  font-size: 2em;
+}
+
+.inner__p--color-blue {
+  color: blue;
+}
 ```
 
 #### Outputted html
 
 ```html
-<div class="container">
-    <h1 class="container__title">I left my wallet in El Segundo</h1>
-    <h2 class="container__title container__title--sub">
-        I got to get it, <span className="container__title__repeat container__title__repeat--sub">I got</span>, <span className="container__title__repeat container__title__repeat--sub">I got to get it</span>
-    </h2>
-    <p class="paragraph lyrics">
-        My mother went away for a month-long <span class="lyrics__rhyme lyrics__rhyme--scheme-1">trip</span><br>
-        Her and some friends on an ocean liner <span class="lyrics__rhyme lyrics__rhyme--scheme-1">ship</span><br>
-        She made a big mistake by leaving me <span class="lyrics__rhyme lyrics__rhyme--scheme-2">home</span><br>
-        I had to <span class="lyrics__rhyme lyrics__rhyme--scheme-2">roam</span> so I picked up the <span class="lyrics__rhyme lyrics__rhyme--scheme-2">phone</span><br>
-        Dialed Ali up to see what was going <span class="lyrics__rhyme lyrics__rhyme--scheme-3">down</span><br>
-        Told him I pick him up so we could drive <span class="lyrics__rhyme lyrics__rhyme--scheme-3">around</span>
-    </p>
+<div class="container container--padded">
+  <h1 class="container__title">This title is an element in the container block</h1>
+  <h2 class="container__title container__title--sub">
+    There's no modifier classname '--small' in the css sheet, so it will not be applied.
+  </h2>
+  <p class="inner__p paragraph">
+    This is a new &lt;Bem/&gt; instance. Classnames in the className property will always be passed on and will not be used for classname generation.
+  </p>
+  <p class="inner__p inner__p--bold inner__p--size-2 inner__p--color-blue">
+    You can use objects for more advanced classname generation.
+  </p>
 </div>
 ```
