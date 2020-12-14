@@ -25,29 +25,37 @@ function recursivelyApplyBem(children, _bem) {
             return child;
         }
 
+        // get child element type, key, props and ref
+        const { type, key, props, ref } = child;
+
         // destruct element props
         const {
             el,
             mod = [],
-            className: elementClassName = '',
+            className: originalElementClassName = '',
             children,
             ...restProps
-        } = child.props;
+        } = props;
 
-        const mainClassName = el || child.name || child.type;
+        // set base className
+        const mainClassName = el || type;
 
+        // bemify
         const elementBem = _bem.el(mainClassName).mod(mod);
 
-        const className = [elementBem.cn, elementClassName].join(' ').trim();
+        // concat with original element classname
+        const className = [elementBem.cn, originalElementClassName].join(' ').trim();
 
         // generate 'new' element with generated bem classname
         // recursively apply bem classnames to 'new' children
         return React.createElement(
-            child.type,
+            type,
             {
                 ...restProps,
                 ...(className && { className }),
-                children: recursivelyApplyBem(children, elementBem)
+                children: recursivelyApplyBem(children, elementBem),
+                key,
+                ref
             }
         );
     });
