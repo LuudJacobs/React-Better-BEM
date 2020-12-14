@@ -1,6 +1,6 @@
 {
   "name": "react-better-bem",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "React component for easy BEM classname handling",
   "main": "dist/Bem.js",
   "module": "src/Bem.js",
