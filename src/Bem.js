@@ -18,45 +18,36 @@ function recursivelyApplyBem(children, _bem) {
         return null;
     }
 
-    return React.Children.map(children, (child) => {
+    return React.Children.map(children, (childElement) => {
         // sorry, only handling DOM type elements
         // so no nested components
-        if (!React.isValidElement(child) || typeof child.type !== 'string') {
-            return child;
+        if (!React.isValidElement(childElement) || typeof childElement.type !== 'string') {
+            return childElement;
         }
-
-        // get child element type, key, props and ref
-        const { type, key, props, ref } = child;
 
         // destruct element props
         const {
             el,
             mod = [],
-            className: originalElementClassName = '',
+            className: originalClassName = '',
             children,
-            ...restProps
-        } = props;
+        } = childElement.props;
 
         // set base className
-        const mainClassName = el || type;
+        const mainClassName = el || childElement.type;
 
         // bemify
         const elementBem = _bem.el(mainClassName).mod(mod);
 
-        // concat with original element classname
-        const className = [elementBem.cn, originalElementClassName].join(' ').trim();
+        // concat with original classname
+        const className = [elementBem.cn, originalClassName].join(' ').trim();
 
-        // generate 'new' element with generated bem classname
-        // recursively apply bem classnames to 'new' children
-        return React.createElement(
-            type,
-            {
-                ...restProps,
-                ...(className && { className }),
-                children: recursivelyApplyBem(children, elementBem),
-                key,
-                ref
-            }
+        // clone element with new className prop
+        // and apply bemify children
+        return React.cloneElement(
+            childElement,
+            { className },
+            recursivelyApplyBem(children, elementBem)
         );
     });
 }
