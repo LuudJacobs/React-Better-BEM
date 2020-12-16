@@ -42,11 +42,11 @@ function recursivelyApplyBem(children, _bem) {
         // concat with original classname
         const className = [elementBem.cn, originalClassName].join(' ').trim();
 
-        // clone element with new className prop
-        // and apply bemify children
+        // clone element with new className prop and apply bem to all child elements recursively
+        // unset el and mod props
         return React.cloneElement(
             childElement,
-            { className },
+            { className, el: undefined, mod: undefined },
             recursivelyApplyBem(children, elementBem)
         );
     });
