@@ -1,6 +1,6 @@
 {
   "name": "react-better-bem",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "React component for easy BEM classname handling",
   "main": "dist/Bem.js",
   "module": "src/Bem.js",
@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/LuudJacobs/React-Better-BEM#readme",
   "dependencies": {
-    "better-bem": "^2.0.1"
+    "better-bem": "^2.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
