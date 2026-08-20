@@ -2,7 +2,7 @@
 
 React component which uses [better-bem](https://github.com/LuudJacobs/better-bem) to easily generate [BEM](https://en.bem.info/methodology/quick-start/) classnames with support for classname maps as imported with [CSS Modules](https://github.com/css-modules/css-modules).
 
-## Install
+## Installation
 
 ```zsh
 # install
@@ -182,3 +182,7 @@ const BemComponent = () => (
   </p>
 </div>
 ```
+
+## Links
+
+[License](https://github.com/LuudJacobs/React-Better-BEM/blob/master/LICENSE) • [Changelog](https://github.com/LuudJacobs/React-Better-BEM/blob/master/CHANGELOG.md)
