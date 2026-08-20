@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Ship README, LICENSE and CHANGELOG with the published package
 - Update `better-bem` to `^2.0.4`
-- Update development dependencies, including webpack 4 to 5
+- Update development dependencies, including webpack 4 to 5 and webpack-cli 3 to 7
+- Resolve all npm audit advisories in development dependencies
 - Publish to npm from GitHub Actions using OIDC
 
 ## [2.2.3] - 2023-02-09
