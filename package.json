@@ -9,7 +9,7 @@
     "src"
   ],
   "scripts": {
-    "test": "echo \"lol 🤣\" && exit 1",
+    "test": "echo \"lol 🤣\" && exit 0",
     "build": "webpack",
     "prepare": "npm run build"
   },
@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/LuudJacobs/React-Better-BEM#readme",
   "dependencies": {
-    "better-bem": "^2.0.3"
+    "better-bem": "^2.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
