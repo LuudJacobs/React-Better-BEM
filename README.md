@@ -1,4 +1,4 @@
-# React-Better-BEM
+# React-Better-BEM 2.2.4
 
 React component which uses [better-bem](https://github.com/LuudJacobs/better-bem) to easily generate [BEM](https://en.bem.info/methodology/quick-start/) classnames with support for classname maps as imported with [CSS Modules](https://github.com/css-modules/css-modules).
 

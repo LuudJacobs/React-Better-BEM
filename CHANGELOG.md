@@ -6,12 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-- Ship README, LICENSE and CHANGELOG with the published package
+## [2.2.4] - 2026-08-20
+
+### Changed
+
 - Update `better-bem` to `^2.0.4`
 - Update development dependencies, including webpack 4 to 5 and webpack-cli 3 to 7
+- Ship README, LICENSE and CHANGELOG with the published package
+- Publish to npm from GitHub Actions using OIDC trusted publishing
+
+### Removed
+
+- Unused `path` development dependency
+
+### Security
+
 - Resolve all npm audit advisories in development dependencies
-- Remove the unused `path` development dependency
-- Publish to npm from GitHub Actions using OIDC
 
 ## [2.2.3] - 2023-02-09
 
